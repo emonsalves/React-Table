@@ -1,37 +1,22 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import BasicTable from './components/tables/BasicTable';
+import Fetch from './helpers/fetchs.js';
 
 function App() {
-    const [count, setCount] = useState(0);
+    const url = 'https://641447dd727d1c0df00622d2.mockapi.io/api/v1/users';
+    const [data, setData] = useState([]);
+
+    const handlerClick = async () => {
+        const data = await Fetch.getData({ url });
+        setData(data);
+    };
 
     return (
         <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank" rel="noreferrer">
-                    <img
-                        src={reactLogo}
-                        className="logo react"
-                        alt="React logo"
-                    />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
+            <h1>React Table</h1>
+            <button onClick={handlerClick}>Fetch Data</button>
+            {data.length > 0 && <BasicTable data={data} />}
         </>
     );
 }
