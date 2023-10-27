@@ -1,2 +1,6 @@
-# React-Table
-well here we goo
+# React-Table & Anothers
+
+First Step
+
+-   create vite
+-   config prettier
